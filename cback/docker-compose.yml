@@ -1,0 +1,32 @@
+version: '3.11'
+
+services:
+  app:
+    build:
+      context: ./app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+
+  # app2:
+  #   build:
+  #     context: ./app2
+  #   ports:
+  #     - "5001:5001"
+  #   depends_on:
+  #     - database
+
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cback1
+    ports:
+      - "5432:5432"
+    volumes:
+      - posg:/var/lib/postgresql/data
+  
+volumes:
+  posg: {}
